@@ -12,7 +12,7 @@ app = FastAPI()
 OFFICIAL_EMAIL = "purnima3911.beai23@chitkara.edu.in"
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-# ---------------- Utility Functions ---------------- #
+
 
 def fibonacci(n: int) -> List[int]:
     if n < 0 or n > 1000:
@@ -72,14 +72,14 @@ def ask_ai(question: str) -> str:
 
     text = r.json()["candidates"][0]["content"]["parts"][0]["text"]
 
-    # Enforce SINGLE-WORD clean output
+
     match = re.search(r"\b[A-Za-z]+\b", text)
     if not match:
         raise RuntimeError("Invalid AI response")
 
     return match.group(0)
 
-# ---------------- API Endpoints ---------------- #
+
 
 @app.get("/health")
 def health():
